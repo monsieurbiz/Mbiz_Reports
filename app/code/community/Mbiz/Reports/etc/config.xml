@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * This file is part of Mbiz_Reports for Magento.
+ *
+ * @license All rights reserved
+ * @author Jacques Bodin-Hullin <@jacquesbh> <j.bodinhullin@monsieurbiz.com>
+ * @category Mbiz
+ * @package Mbiz_Reports
+ * @copyright Copyright (c) 2015 Monsieur Biz (http://monsieurbiz.com/)
+ */
+-->
+<config>
+    <modules>
+        <Mbiz_Reports>
+            <version>0.1.0</version>
+        </Mbiz_Reports>
+    </modules>
+    <global>
+        <models>
+            <mbiz_reports>
+                <class>Mbiz_Reports_Model</class>
+            </mbiz_reports>
+        </models>
+        <helpers>
+            <mbiz_reports>
+                <class>Mbiz_Reports_Helper</class>
+            </mbiz_reports>
+        </helpers>
+        <blocks>
+            <mbiz_reports>
+                <class>Mbiz_Reports_Block</class>
+            </mbiz_reports>
+        </blocks>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <mbiz_reports after="Mage_Adminhtml">Mbiz_Reports_Adminhtml</mbiz_reports>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <translate>
+            <modules>
+                <Mbiz_Reports>
+                    <files>
+                        <default>Mbiz_Reports.csv</default>
+                    </files>
+                </Mbiz_Reports>
+            </modules>
+        </translate>
+    </adminhtml>
+    <mbiz_reports>
+        <report>
+            <summary>
+                <model>mbiz_reports/sales_journal_result_summary</model>
+                <block>mbiz_reports/adminhtml_sales_journal_result_summary</block>
+            </summary>
+            <summary_avg>
+                <model>mbiz_reports/sales_journal_result_summaryAvg</model>
+                <block>mbiz_reports/adminhtml_sales_journal_result_summaryAvg</block>
+            </summary_avg>
+            <by_payment_method>
+                <model>mbiz_reports/sales_journal_result_payment_method</model>
+                <block>mbiz_reports/adminhtml_sales_journal_result_byPaymentMethod</block>
+            </by_payment_method>
+            <tax_rate>
+                <model>mbiz_reports/sales_journal_result_tax_rate</model>
+                <block>mbiz_reports/adminhtml_sales_journal_result_tva</block>
+            </tax_rate>
+        </report>
+    </mbiz_reports>
+</config>

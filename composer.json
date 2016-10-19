@@ -1,0 +1,15 @@
+{
+    "name": "monsieurbiz/mbiz_reports",
+    "description": "Magento module which adds a simple report page.",
+    "type": "magento-module",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jacques Bodin-Hullin",
+            "email": "j.bodinhullin@monsieurbiz.com"
+        }
+    ],
+    "suggest": {
+        "magento-hackathon/magento-composer-installer": "Allows to manage this package as a dependency."
+    }
+}

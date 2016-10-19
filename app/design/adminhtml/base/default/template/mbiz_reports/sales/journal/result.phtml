@@ -1,0 +1,26 @@
+<?php
+/**
+ * This file is part of Mbiz_Reports for Magento.
+ *
+ * @license All rights reserved
+ * @author Jacques Bodin-Hullin <@jacquesbh> <j.bodinhullin@monsieurbiz.com>
+ * @category Mbiz
+ * @package Mbiz_Reports
+ * @copyright Copyright (c) 2015 Monsieur Biz (http://monsieurbiz.com/)
+ */
+/* @var $this Mbiz_Reports_Block_Adminhtml_Sales_Journal_Result */
+
+$_result = $this->getResult();
+?>
+
+<div class="content-header">
+    <table cellspacing="0">
+        <tbody>
+            <tr>
+                <td style="width:50%;"><h3 class="icon-head"><?php echo $this->getTitle(); ?></h3></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<?php echo $this->getChildHtml('', true, true); ?>

@@ -1,0 +1,38 @@
+<?php
+/**
+ * This file is part of Mbiz_Reports for Magento.
+ *
+ * @license All rights reserved
+ * @author Jacques Bodin-Hullin <@jacquesbh> <j.bodinhullin@monsieurbiz.com>
+ * @category Mbiz
+ * @package Mbiz_Reports
+ * @copyright Copyright (c) 2015 Monsieur Biz (http://monsieurbiz.com/)
+ */
+/* @var $this Mbiz_Reports_Block_Adminhtml_Sales_Journal_Result_Abstract */
+?>
+
+<h4 class="icon-head" style="margin-top:20px;"><?php echo $this->getTitle(); ?></h4>
+<div class="grid">
+    <div class="hor-scroll">
+        <table cellspacing="0" class="data">
+            <thead>
+                <tr class="headings">
+                    <?php foreach ($this->getColumns() as $_name): ?>
+                    <th class="no-link"><span class="nobr"><?php echo $_name; ?></span></th>
+                    <?php endforeach; ?>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $_i = 0;
+                foreach ($this->getItems() as $_item): ?>
+                <tr class="<?php if ($_i % 2): ?>odd<?php else: ?>even<?php endif; ?>">
+                    <?php foreach ($this->getColumns() as $_columnCode => $_columnName): ?>
+                    <td class="a-right"><?php echo $this->formatValue($_columnCode, $_item->getData($_columnCode)); ?></td>
+                    <?php endforeach; ?>
+                </tr>
+                <?php $_i++; endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>

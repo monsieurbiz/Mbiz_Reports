@@ -1,0 +1,5 @@
+app/code/community/Mbiz/Reports app/code/community/Mbiz/Reports
+app/design/adminhtml/base/default/template/mbiz_reports app/design/adminhtml/base/default/template/mbiz_reports
+app/etc/modules/Mbiz_Reports.xml app/etc/modules/Mbiz_Reports.xml
+app/locale/en_US/Mbiz_Reports.csv app/locale/en_US/Mbiz_Reports.csv
+app/locale/fr_FR/Mbiz_Reports.csv app/locale/fr_FR/Mbiz_Reports.csv
