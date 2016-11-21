@@ -28,12 +28,12 @@ class Mbiz_Reports_Model_Sales_Journal_Result_SummaryAvg extends Mbiz_Reports_Mo
             ->from([
                 'invoice' => $this->getTableName('sales/invoice')
             ], [
-                'subtotal' => 'SUM(invoice.base_subtotal) / COUNT(*)',
-                'discount' => 'SUM(invoice.base_discount_amount) / COUNT(*)',
-                'shipping' => 'SUM(invoice.shipping_amount) / COUNT(*)',
-                'tax' => 'SUM(invoice.base_tax_amount) / COUNT(*)',
-                'total' => 'SUM(invoice.grand_total) / COUNT(*)',
-                'avg' => 'SUM(invoice.base_subtotal + invoice.base_discount_amount + invoice.shipping_amount) / COUNT(*)',
+                'subtotal' => 'SUM(ROUND(invoice.base_subtotal, 2)) / COUNT(*)',
+                'discount' => 'SUM(ROUND(invoice.base_discount_amount, 2)) / COUNT(*)',
+                'shipping' => 'SUM(ROUND(invoice.shipping_amount, 2)) / COUNT(*)',
+                'tax' => 'SUM(ROUND(invoice.base_tax_amount, 2)) / COUNT(*)',
+                'total' => 'SUM(ROUND(invoice.grand_total, 2)) / COUNT(*)',
+                'avg' => 'SUM(ROUND(invoice.base_subtotal, 2) + ROUND(invoice.base_discount_amount, 2) + ROUND(invoice.shipping_amount, 2)) / COUNT(*)',
             ])
             ->where("DATE(invoice.created_at) >= ?", $from->toString('y-MM-dd'))
             ->where("DATE(invoice.created_at) <= ?", $to->toString('y-MM-dd'))

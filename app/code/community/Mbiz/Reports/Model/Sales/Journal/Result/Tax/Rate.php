@@ -27,9 +27,9 @@ class Mbiz_Reports_Model_Sales_Journal_Result_Tax_Rate extends Mbiz_Reports_Mode
     {
         // The first select calculates the products taxes
         $firstSelect = $this->getReadAdapter()->select();
-        $amount      = "IFNULL(item.base_row_total, 0)";
-        $discount    = "IFNULL(item.base_discount_amount, 0)";
-        $tax         = "IFNULL(item.base_tax_amount, 0)";
+        $amount      = "ROUND(IFNULL(item.base_row_total, 0), 2)";
+        $discount    = "ROUND(IFNULL(item.base_discount_amount, 0), 2)";
+        $tax         = "ROUND(IFNULL(item.base_tax_amount, 0), 2)";
         $firstSelect
             ->from([
                 'invoice' => $this->getTableName('sales/invoice'),
@@ -53,9 +53,9 @@ class Mbiz_Reports_Model_Sales_Journal_Result_Tax_Rate extends Mbiz_Reports_Mode
 
         // The second select calculates the taxes on the shipping (which is a little bit more complicated)
         $secondSelect = $this->getReadAdapter()->select();
-        $amount       = "IFNULL(invoice.base_shipping_amount, 0)";
-        $discount     = "(IFNULL(invoice.base_discount_amount, 0) + SUM(IFNULL(item.base_discount_amount, 0)))";
-        $tax          = "IFNULL(invoice.base_tax_amount, 0) - SUM(IFNULL(item.base_tax_amount, 0))";
+        $amount       = "ROUND(IFNULL(invoice.base_shipping_amount, 0), 2)";
+        $discount     = "(ROUND(IFNULL(invoice.base_discount_amount, 0), 2) + SUM(ROUND(IFNULL(item.base_discount_amount, 0), 2)))";
+        $tax          = "ROUND(IFNULL(invoice.base_tax_amount, 0), 2) - SUM(ROUND(IFNULL(item.base_tax_amount, 0), 2))";
         $secondSelect
             ->from([
                 'invoice' => $this->getTableName('sales/invoice'),
@@ -83,11 +83,11 @@ class Mbiz_Reports_Model_Sales_Journal_Result_Tax_Rate extends Mbiz_Reports_Mode
                 'results' => new Zend_Db_Expr("($firstSelect UNION ALL $secondSelect)"),
             ], null)
             ->columns([
-                'amount'            => 'SUM(amount)',
-                'discount'          => 'SUM(discount)',
-                'amount_discounted' => 'SUM(amount_discounted)',
-                'tax'               => 'SUM(tax)',
-                'total'             => 'SUM(total)',
+                'amount'            => 'SUM(ROUND(amount, 2))',
+                'discount'          => 'SUM(ROUND(discount, 2))',
+                'amount_discounted' => 'SUM(ROUND(amount_discounted, 2))',
+                'tax'               => 'SUM(ROUND(tax, 2))',
+                'total'             => 'SUM(ROUND(total, 2))',
                 'rate'              => 'rate',
             ])
             ->group('rate')
