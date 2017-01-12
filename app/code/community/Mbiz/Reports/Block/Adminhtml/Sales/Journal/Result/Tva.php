@@ -34,9 +34,10 @@ class Mbiz_Reports_Block_Adminhtml_Sales_Journal_Result_Tva extends Mbiz_Reports
     public function getColumns()
     {
         return [
-            'rate'              => $this->__("TVA"),
-            'amount_discounted' => $this->__("Hors taxe correspondant"),
-            'tax'               => $this->__("Montant"),
+            'rate' => $this->__("TVA"),
+            'title' => $this->__("Title"),
+            'nb_orders' => $this->__("Number of orders"),
+            'amount' => $this->__("Montant"),
         ];
     }
 
@@ -46,10 +47,12 @@ class Mbiz_Reports_Block_Adminhtml_Sales_Journal_Result_Tva extends Mbiz_Reports
     public function formatValue($columnCode, $value)
     {
         switch ($columnCode) {
+            case 'amount':
+                return $this->formatPrice($value);
             case 'rate':
                 return $value . ' %';
             default:
-                return $this->formatPrice($value);
+                return $value;
         }
     }
 
