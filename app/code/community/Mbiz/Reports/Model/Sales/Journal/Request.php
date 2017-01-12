@@ -63,7 +63,7 @@ class Mbiz_Reports_Model_Sales_Journal_Request extends Mage_Core_Model_Abstract
             // 5. From is before To
             $from = $this->getDate('from');
             $to   = $this->getDate('to');
-            if ($from->compareDate($to) !== -1) {
+            if ($from->compare($to) !== -1) {
                 Mage::throwException(Mage::helper('mbiz_reports')->__("Please set a valid period."));
             }
         }
