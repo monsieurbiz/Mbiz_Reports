@@ -42,6 +42,7 @@ class Mbiz_Reports_Model_Sales_Journal_Result_Tax_Rate extends Mbiz_Reports_Mode
             ])
             ->where("DATE(invoice.created_at) >= ?", $from->toString('y-MM-dd'))
             ->where("DATE(invoice.created_at) <= ?", $to->toString('y-MM-dd'))
+            ->where("ROUND(IFNULL(invoice.base_tax_amount, 0), 2) = ROUND(IFNULL(tax.base_amount, 0), 2)")
             ->group("tax.code")
         ;
 
