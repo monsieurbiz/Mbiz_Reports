@@ -34,7 +34,7 @@ class Mbiz_Reports_Block_Adminhtml_Sales_Journal_Result_ByPaymentMethod extends 
     public function getColumns()
     {
         return [
-            'payment_method' => $this->__("Méthode de paiement"),
+            'payment_method_name' => $this->__("Méthode de paiement"),
             'count'          => $this->__("Nombre de factures"),
             'subtotal'       => $this->__("Montant HT"),
             'discount'       => $this->__("Montant Promo HT"),
@@ -50,7 +50,7 @@ class Mbiz_Reports_Block_Adminhtml_Sales_Journal_Result_ByPaymentMethod extends 
     public function formatValue($columnCode, $value)
     {
         switch ($columnCode) {
-            case 'payment_method':
+            case 'payment_method_name':
             case 'count':
                 return $value;
             default:
@@ -67,7 +67,7 @@ class Mbiz_Reports_Block_Adminhtml_Sales_Journal_Result_ByPaymentMethod extends 
             'shipping' => 0,
             'tax' => 0,
             'total' => 0,
-            'payment_method' => '<strong>TOTAL</strong>',
+            'payment_method_name' => '<strong>TOTAL</strong>',
         ]);
         $items = parent::getItems();
 

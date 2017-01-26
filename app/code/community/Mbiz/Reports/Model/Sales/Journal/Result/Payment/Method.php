@@ -53,9 +53,13 @@ class Mbiz_Reports_Model_Sales_Journal_Result_Payment_Method extends Mbiz_Report
         ;
 
         $results = $select->query()->fetchAll();
+
+        $methods = Mage::helper('payment')->getPaymentMethodList();
         $byPaymentMethod = [];
         foreach ($results as $result) {
-            $byPaymentMethod[$result['payment_method']] = new Varien_Object($result);
+            $byPaymentMethod[$result['payment_method']] = new Varien_Object($result + [
+                'payment_method_name' => isset($methods[$result['payment_method']]) ? $methods[$result['payment_method']] : $result['payment_method']
+            ]);
         }
 
         return $byPaymentMethod;
