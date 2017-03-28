@@ -25,8 +25,9 @@ class Mbiz_Reports_Model_Sales_Journal_Result_Tax_Rate extends Mbiz_Reports_Mode
      */
     protected function _load(\Mbiz_Reports_Model_Sales_Journal_Request $request, \Zend_Date $from, \Zend_Date $to)
     {
-        $select = $this->getReadAdapter()->select();
-        $select
+        // Select all invoices with a non-zero tax rate
+        $selectNonZeroTaxRate = $this->getReadAdapter()->select();
+        $selectNonZeroTaxRate
             ->from(['tax' => $this->getTableName('sales/order_tax')], null)
             ->joinInner(
                 ['invoice' => $this->getTableName('sales/invoice')],
@@ -46,7 +47,32 @@ class Mbiz_Reports_Model_Sales_Journal_Result_Tax_Rate extends Mbiz_Reports_Mode
             ->group("tax.code")
         ;
 
-        $results = $select->query()->fetchAll();
+        $selectOrdersId = $this->getReadAdapter()->select();
+        $selectOrdersId
+            ->from($this->getTableName('sales/order_tax'), ['order_id'])
+        ;
+
+        // Select all invoices with a 0% tax rate
+        $selectZeroTaxRate = $this->getReadAdapter()->select();
+        $selectZeroTaxRate
+            ->from(['invoice' => $this->getTableName('sales/invoice')], null)
+            ->columns([
+                "code" => new Zend_Db_Expr("'ZERO'"),
+                "title" => new Zend_Db_Expr("'ZERO'"),
+                "rate" => new Zend_Db_Expr("0.0"),
+                "nb_orders" => "COUNT(DISTINCT invoice.order_id)",
+                "amount" => new Zend_Db_Expr("0.0"),
+            ])
+            ->where("DATE(invoice.created_at) >= ?", $from->toString('y-MM-dd'))
+            ->where("DATE(invoice.created_at) <= ?", $to->toString('y-MM-dd'))
+            ->where("invoice.order_id NOT IN ?", $selectOrdersId)
+        ;
+
+        // Unite results of both selects
+        $mainSelect = $this->getReadAdapter()->select();
+        $mainSelect->union([$selectNonZeroTaxRate, $selectZeroTaxRate]);
+
+        $results = $mainSelect->query()->fetchAll();
         $taxByRate = [];
         foreach ($results as $result) {
             $taxByRate[$result['code']] = new Varien_Object($result);
