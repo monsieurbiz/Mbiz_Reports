@@ -69,6 +69,10 @@
                 <model>mbiz_reports/sales_journal_result_payment_method</model>
                 <block>mbiz_reports/adminhtml_sales_journal_result_byPaymentMethod</block>
             </by_payment_method>
+            <credit_memo>
+                <model>mbiz_reports/sales_journal_result_creditMemo</model>
+                <block>mbiz_reports/adminhtml_sales_journal_result_creditMemo</block>
+            </credit_memo>
             <tax_rate>
                 <model>mbiz_reports/sales_journal_result_tax_rate</model>
                 <block>mbiz_reports/adminhtml_sales_journal_result_tva</block>
