@@ -29,8 +29,7 @@ class Mbiz_Reports_Block_Adminhtml_Sales_Journal_Result_SummaryAvg extends Mbiz_
     }
 
     /**
-     * Retrieve the columns (code => name)
-     * @return array
+     * {@inheritdoc}
      */
     public function getColumns()
     {

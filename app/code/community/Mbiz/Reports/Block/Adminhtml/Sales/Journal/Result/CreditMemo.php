@@ -29,8 +29,7 @@ class Mbiz_Reports_Block_Adminhtml_Sales_Journal_Result_CreditMemo extends Mbiz_
     }
 
     /**
-     * Retrieve the columns (code => name)
-     * @return array
+     * {@inheritdoc}
      */
     public function getColumns()
     {
@@ -40,10 +39,7 @@ class Mbiz_Reports_Block_Adminhtml_Sales_Journal_Result_CreditMemo extends Mbiz_
     }
 
     /**
-     * Format a value
-     * @param string $columnCode
-     * @param string $value
-     * @return string The value formated
+     * {@inheritdoc}
      */
     public function formatValue($columnCode, $value)
     {

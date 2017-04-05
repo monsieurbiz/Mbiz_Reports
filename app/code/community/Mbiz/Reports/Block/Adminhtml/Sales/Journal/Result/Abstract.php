@@ -64,7 +64,7 @@ abstract class Mbiz_Reports_Block_Adminhtml_Sales_Journal_Result_Abstract extend
      * Format a value
      * @param string $columnCode
      * @param string $value
-     * @return string The value formated
+     * @return string The value formatted
      */
     public function formatValue($columnCode, $value)
     {
