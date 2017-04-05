@@ -2,7 +2,7 @@
 /**
  * This file is part of Mbiz_Reports for Magento.
  *
- * @license All rights reserved
+ * @license MIT
  * @author Mina Amrouche <m.amrouche@monsieurbiz.com> <@mina_amrouche>
  * @category Mbiz
  * @package Mbiz_Reports
