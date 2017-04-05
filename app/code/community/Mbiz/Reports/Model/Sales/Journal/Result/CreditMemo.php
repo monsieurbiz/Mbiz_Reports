@@ -28,7 +28,8 @@ class MBiz_Reports_Model_Sales_Journal_Result_CreditMemo extends Mbiz_Reports_Mo
             ->from([
                 'memo' => $this->getTableName('sales/creditmemo')
             ], [
-                'total_credit_memo' => 'SUM(ROUND(memo.grand_total, 2))',
+                'subtotal' => 'SUM(ROUND(memo.subtotal, 2))',
+                'total' => 'SUM(ROUND(memo.grand_total, 2))',
             ])
             ->where("DATE(memo.created_at) >= ?", $from->toString('y-MM-dd'))
             ->where("DATE(memo.created_at) <= ?", $to->toString('y-MM-dd'))
