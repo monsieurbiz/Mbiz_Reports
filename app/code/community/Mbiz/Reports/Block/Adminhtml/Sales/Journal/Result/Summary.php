@@ -2,7 +2,7 @@
 /**
  * This file is part of Mbiz_Reports for Magento.
  *
- * @license All rights reserved
+ * @license MIT
  * @author Jacques Bodin-Hullin <@jacquesbh> <j.bodinhullin@monsieurbiz.com> <@jacquesbh>
  * @category Mbiz
  * @package Mbiz_Reports
@@ -29,8 +29,7 @@ class Mbiz_Reports_Block_Adminhtml_Sales_Journal_Result_Summary extends Mbiz_Rep
     }
 
     /**
-     * Retrieve the columns (code => name)
-     * @return array
+     * {@inheritdoc}
      */
     public function getColumns()
     {
@@ -44,10 +43,7 @@ class Mbiz_Reports_Block_Adminhtml_Sales_Journal_Result_Summary extends Mbiz_Rep
     }
 
     /**
-     * Format a value
-     * @param string $columnCode
-     * @param string $value
-     * @return string The value formated
+     * {@inheritdoc}
      */
     public function formatValue($columnCode, $value)
     {

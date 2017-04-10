@@ -10,3 +10,6 @@
 "Please set a valid period.","Merci de renseigner une période valide."
 "From %s to %s","Du %s au %s"
 "%s (Today)","%s (Aujourd'hui)"
+"Credit Memos","Avoirs"
+"Credit Memos Total Amount","Montant total des avoirs TTC"
+"Credit Memos Total Amount Excluding Tax","Montant total des avoirs HT"

@@ -2,7 +2,7 @@
 /**
  * This file is part of Mbiz_Reports for Magento.
  *
- * @license All rights reserved
+ * @license MIT
  * @author Jacques Bodin-Hullin <@jacquesbh> <j.bodinhullin@monsieurbiz.com> <@jacquesbh>
  * @category Mbiz
  * @package Mbiz_Reports
@@ -64,7 +64,7 @@ abstract class Mbiz_Reports_Block_Adminhtml_Sales_Journal_Result_Abstract extend
      * Format a value
      * @param string $columnCode
      * @param string $value
-     * @return string The value formated
+     * @return string The value formatted
      */
     public function formatValue($columnCode, $value)
     {
