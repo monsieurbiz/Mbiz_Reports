@@ -38,12 +38,14 @@ class Mbiz_Reports_Model_Sales_Journal_Result_Tax_Rate extends Mbiz_Reports_Mode
                 "code" => "tax.code",
                 "title" => "tax.title",
                 "rate" => "ROUND(tax.percent, 2)",
-                "nb_orders" => "COUNT(DISTINCT tax.order_id)",
-                "amount" => "SUM(ROUND(IFNULL(tax.base_amount, 0), 2))",
+                "nb_invoices" => "COUNT(invoice.order_id)",
+                'invoices_subtotal' => "SUM(ROUND(IFNULL(invoice.base_subtotal, 0), 2))",
+                'invoices_discount' => "SUM(ROUND(IFNULL(invoice.base_discount_amount, 0), 2))",
+                "amount" => "SUM(ROUND(IFNULL(invoice.base_tax_amount, 0), 2))",
+                'invoices_total'    => "SUM(ROUND(IFNULL(invoice.base_grand_total, 0), 2))",
             ])
             ->where("DATE(invoice.created_at) >= ?", $from->toString('y-MM-dd'))
             ->where("DATE(invoice.created_at) <= ?", $to->toString('y-MM-dd'))
-            ->where("ROUND(IFNULL(invoice.base_tax_amount, 0), 2) = ROUND(IFNULL(tax.base_amount, 0), 2)")
             ->group("tax.code")
         ;
 
@@ -60,8 +62,11 @@ class Mbiz_Reports_Model_Sales_Journal_Result_Tax_Rate extends Mbiz_Reports_Mode
                 "code" => new Zend_Db_Expr("'ZERO'"),
                 "title" => new Zend_Db_Expr("'ZERO'"),
                 "rate" => new Zend_Db_Expr("0.0"),
-                "nb_orders" => "COUNT(DISTINCT invoice.order_id)",
+                "nb_invoices" => "COUNT(invoice.order_id)",
+                'invoices_subtotal' => "SUM(ROUND(IFNULL(invoice.base_subtotal, 0), 2))",
+                'invoices_discount' => "SUM(ROUND(IFNULL(invoice.base_discount_amount, 0), 2))",
                 "amount" => new Zend_Db_Expr("0.0"),
+                'invoices_total'    => "SUM(ROUND(IFNULL(invoice.base_grand_total, 0), 2))",
             ])
             ->where("DATE(invoice.created_at) >= ?", $from->toString('y-MM-dd'))
             ->where("DATE(invoice.created_at) <= ?", $to->toString('y-MM-dd'))

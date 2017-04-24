@@ -32,11 +32,11 @@ class Mbiz_Reports_Model_Sales_Journal_Result_Payment_Method extends Mbiz_Report
                 'invoice' => $this->getTableName('sales/invoice')
             ], [
                 'count'    => 'COUNT(*)',
-                'subtotal' => 'SUM(ROUND(invoice.base_subtotal, 2))',
-                'discount' => 'SUM(ROUND(invoice.base_discount_amount, 2))',
-                'shipping' => 'SUM(ROUND(invoice.shipping_amount, 2))',
-                'tax'      => 'SUM(ROUND(invoice.base_tax_amount, 2))',
-                'total'    => 'SUM(ROUND(invoice.grand_total, 2))',
+                'subtotal' => 'SUM(ROUND(IFNULL(invoice.base_subtotal, 0), 2))',
+                'discount' => 'SUM(ROUND(IFNULL(invoice.base_discount_amount, 0), 2))',
+                'shipping' => 'SUM(ROUND(IFNULL(invoice.shipping_amount, 0), 2))',
+                'tax'      => 'SUM(ROUND(IFNULL(invoice.base_tax_amount, 0), 2))',
+                'total'    => 'SUM(ROUND(IFNULL(invoice.base_grand_total, 0), 2))',
             ])
             ->where("DATE(invoice.created_at) >= ?", $from->toString('y-MM-dd'))
             ->where("DATE(invoice.created_at) <= ?", $to->toString('y-MM-dd'))

@@ -14,3 +14,8 @@
 "Credit Memos Total Amount","Montant total des avoirs TTC"
 "Credit Memos Total Amount Excluding Tax","Montant total des avoirs HT"
 "Number of Credit Memos","Nombre d'avoirs"
+"Invoices Discount Amount Excluding Tax","Montant Promo HT"
+"Invoices Amount Excluding Tax","Montant HT"
+"TVA Amount","Montant TVA"
+"Invoices Amount Including Tax","Montant TTC"
+"Number of Invoices","Nombre de factures"
