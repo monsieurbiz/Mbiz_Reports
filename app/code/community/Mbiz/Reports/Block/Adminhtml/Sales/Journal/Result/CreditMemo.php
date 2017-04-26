@@ -34,6 +34,7 @@ class Mbiz_Reports_Block_Adminhtml_Sales_Journal_Result_CreditMemo extends Mbiz_
     public function getColumns()
     {
         return [
+            "count" => $this->__('Number of Credit Memos'),
             "subtotal" => $this->__('Credit Memos Total Amount Excluding Tax'),
             "total" => $this->__('Credit Memos Total Amount'),
         ];
@@ -44,7 +45,12 @@ class Mbiz_Reports_Block_Adminhtml_Sales_Journal_Result_CreditMemo extends Mbiz_
      */
     public function formatValue($columnCode, $value)
     {
-        return $this->formatPrice($value);
+        switch ($columnCode) {
+            case 'count':
+                return $value;
+            default:
+                return $this->formatPrice($value);
+        }
     }
 
 // Monsieur Biz Tag NEW_METHOD

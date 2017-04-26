@@ -34,10 +34,13 @@ class Mbiz_Reports_Block_Adminhtml_Sales_Journal_Result_Tva extends Mbiz_Reports
     public function getColumns()
     {
         return [
-            'rate' => $this->__("TVA"),
             'title' => $this->__("Title"),
-            'nb_orders' => $this->__("Number of orders"),
-            'amount' => $this->__("Montant"),
+            'rate' => $this->__("TVA"),
+            'nb_invoices' => $this->__("Number of Invoices"),
+            'invoices_subtotal' => $this->__("Invoices Amount Excluding Tax"),
+            'invoices_discount' => $this->__("Invoices Discount Amount Excluding Tax"),
+            'amount' => $this->__("TVA Amount"),
+            'invoices_total' => $this->__("Invoices Amount Including Tax"),
         ];
     }
 
@@ -47,13 +50,44 @@ class Mbiz_Reports_Block_Adminhtml_Sales_Journal_Result_Tva extends Mbiz_Reports
     public function formatValue($columnCode, $value)
     {
         switch ($columnCode) {
-            case 'amount':
-                return $this->formatPrice($value);
+            case 'title':
+            case 'nb_invoices':
+                return $value;
             case 'rate':
                 return $value . ' %';
             default:
-                return $value;
+                return $this->formatPrice($value);
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getItems()
+    {
+        $total = new Varien_Object([
+            'title' => '<strong>TOTAL</strong>',
+            'rate' => null,
+            'nb_invoices' => 0,
+            'invoices_subtotal' => 0,
+            'invoices_discount' => 0,
+            'amount' => 0,
+            'invoices_total' => 0,
+        ]);
+        $items = parent::getItems();
+
+        foreach ($items as $item) {
+            $total
+                ->setNbInvoices($total->getNbInvoices() + $item->getNbInvoices())
+                ->setInvoicesSubtotal($total->getInvoicesSubtotal() + $item->getInvoicesSubtotal())
+                ->setInvoicesDiscount($total->getInvoicesDiscount() + $item->getInvoicesDiscount())
+                ->setAmount($total->getAmount() + $item->getAmount())
+                ->setInvoicesTotal($total->getInvoicesTotal() + $item->getInvoicesTotal())
+            ;
+        }
+        $items['total'] = $total;
+
+        return $items;
     }
 
 // Monsieur Biz Tag NEW_METHOD

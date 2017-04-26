@@ -28,6 +28,7 @@ class MBiz_Reports_Model_Sales_Journal_Result_CreditMemo extends Mbiz_Reports_Mo
             ->from([
                 'memo' => $this->getTableName('sales/creditmemo')
             ], [
+                'count' => 'COUNT(*)',
                 'subtotal' => 'SUM(ROUND(memo.subtotal, 2))',
                 'total' => 'SUM(ROUND(memo.grand_total, 2))',
             ])
