@@ -34,8 +34,8 @@ class Mbiz_Reports_Model_Sales_Journal_Result_Summary extends Mbiz_Reports_Model
                 'tax'      => 'SUM(ROUND(invoice.base_tax_amount, 2))',
                 'total'    => 'SUM(ROUND(invoice.grand_total, 2))',
             ])
-            ->where("DATE(invoice.created_at) >= ?", $from->toString('y-MM-dd'))
-            ->where("DATE(invoice.created_at) <= ?", $to->toString('y-MM-dd'))
+            ->where("invoice.created_at >= ?", $from->toString('y-MM-dd HH:mm:ss'))
+            ->where("invoice.created_at <= ?", $to->toString('y-MM-dd HH:mm:ss'))
         ;
 
         $results = $select->query()->fetch();

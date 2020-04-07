@@ -35,8 +35,8 @@ class Mbiz_Reports_Model_Sales_Journal_Result_SummaryAvg extends Mbiz_Reports_Mo
                 'total' => 'SUM(ROUND(invoice.grand_total, 2)) / COUNT(*)',
                 'avg' => 'SUM(ROUND(invoice.base_subtotal, 2) + ROUND(invoice.base_discount_amount, 2) + ROUND(invoice.shipping_amount, 2)) / COUNT(*)',
             ])
-            ->where("DATE(invoice.created_at) >= ?", $from->toString('y-MM-dd'))
-            ->where("DATE(invoice.created_at) <= ?", $to->toString('y-MM-dd'))
+            ->where("invoice.created_at >= ?", $from->toString('y-MM-dd HH:mm:ss'))
+            ->where("invoice.created_at <= ?", $to->toString('y-MM-dd HH:mm:ss'))
         ;
 
         $results = $select->query()->fetch();
