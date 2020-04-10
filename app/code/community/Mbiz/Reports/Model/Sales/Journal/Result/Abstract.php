@@ -33,6 +33,9 @@ abstract class Mbiz_Reports_Model_Sales_Journal_Result_Abstract extends Varien_O
         // The period
         list($from, $to) = $request->getPeriod();
 
+        $from = $this->convertToGmt($from->toString('y-MM-dd') . '00:00:00');
+        $to = $this->convertToGmt($to->toString('y-MM-dd') . '23:59:59');
+
         return $this->_load($request, $from, $to);
     }
 
@@ -55,6 +58,23 @@ abstract class Mbiz_Reports_Model_Sales_Journal_Result_Abstract extends Varien_O
         /* @var $res Mage_Core_Model_Resource */
         $res = Mage::getSingleton('core/resource');
         return $res->getTableName($alias);
+    }
+
+    /**
+     * Convert the given string in format `Y-m-d H:i:s` to a date in GMT
+     *
+     * @param string $datetime
+     * @return Zend_Date
+     * @throws Zend_Date_Exception
+     */
+    public function convertToGmt($datetime)
+    {
+        return Mage::app()->getLocale()->date(
+            Varien_Date::toTimestamp(Mage::getModel('core/date')->gmtDate('Y-m-d H:i:s', $datetime)),
+            null,
+            null,
+            true
+        )->setTimezone('UTC');
     }
 
     /**

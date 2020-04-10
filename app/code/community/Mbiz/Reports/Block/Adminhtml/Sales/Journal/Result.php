@@ -92,7 +92,7 @@ class Mbiz_Reports_Block_Adminhtml_Sales_Journal_Result extends Mage_Adminhtml_B
             $title = Mage::helper('mbiz_reports')->__(
                 "From %s to %s",
                 $this->getRequest()->getFromDate()->toString(Zend_Date::DATE_LONG),
-                $this->getRequest()->getTODate()->toString(Zend_Date::DATE_LONG)
+                $this->getRequest()->getToDate()->toString(Zend_Date::DATE_LONG)
             );
         }
         return $title;
